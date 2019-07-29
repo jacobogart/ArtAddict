@@ -6,7 +6,9 @@ const paintingCleaner = (results) => {
     period: painting.period || "Unkown",
     credit: painting.creditline,
     medium: painting.medium,
-    artist: painting.people[0].name || "Unknown",
+    artist: painting.people 
+      ? painting.people[0].name 
+      : "Unknown",
     height: painting.images[0].height,
     width: painting.images[0].width
   };

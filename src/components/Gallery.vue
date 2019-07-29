@@ -1,29 +1,66 @@
 <template>
-  <img src="../assets/portraitFrame.png" alt="Image Frame" class="frame"/>
+  <section class="gallery">
+    <img
+      src="../assets/portraitFrame.png"
+      alt="Image Frame"
+      class="frame"
+      v-bind:style="{ 
+        width: this.findWidth() + 300 + 'px' 
+      }"
+    />
+    <img
+      class="painting"
+      v-bind:src="currentPainting.imageURL"
+      v-bind:alt="currentPainting.title"
+      v-bind:style="{ 
+        width: this.findWidth() + 'px' 
+      }"
+    />
+  </section>
 </template>
 
 <script>
-import { fetchPainting } from '../../api/fetchPainting';
+import { fetchPainting } from "../../api/fetchPainting";
 
 export default {
-  name: 'Gallery',
+  name: "Gallery",
   data() {
     return {
       currentPainting: {},
       currentPage: 1
+    };
+  },
+  methods: {
+    findWidth() {
+      return (this.currentPainting.width / this.currentPainting.height) * 400
     }
   },
   created() {
     fetchPainting(this.currentPage)
-      .then(result => this.currentPainting = result)
-      .then(() => this.currentPage++)
+      .then(result => (this.currentPainting = result))
+      .then(() => this.currentPage++);
   }
 };
 </script>
 
 <style scoped>
+.gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px
+}
+.frame,
+.painting {
+  position: absolute;
+}
+
+.painting {
+  height: 400px
+}
+
 .frame {
-  height: 100px;
-  width: 200px
+  z-index: 1;
+  height: 550px
 }
 </style>
