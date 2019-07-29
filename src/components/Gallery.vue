@@ -16,51 +16,62 @@
         width: this.findWidth() + 'px',
       }"
     />
+    <button @click="nextPage">MORE ART</button>
   </section>
 </template>
 
 <script>
-import { fetchPainting } from "../../api/fetchPainting";
+  import { fetchPainting } from "../../api/fetchPainting";
 
-export default {
-  name: "Gallery",
-  data() {
-    return {
-      currentPainting: {},
-      currentPage: 126
-    };
-  },
-  methods: {
-    findWidth() {
-      return (this.currentPainting.width / this.currentPainting.height) * 400
+  export default {
+    name: "Gallery",
+    data() {
+      return {
+        currentPainting: {},
+        currentPage: 1
+      };
+    },
+    methods: {
+      findWidth() {
+        return (this.currentPainting.width / this.currentPainting.height) * 400
+      },
+      nextPage() {
+        this.currentPage++;
+        fetchPainting(this.currentPage)
+          .then(result => (this.currentPainting = result))
+      }
+    },
+    created() {
+      fetchPainting(this.currentPage)
+        .then(result => (this.currentPainting = result))
+        // .then(() => this.currentPage++);
     }
-  },
-  created() {
-    fetchPainting(this.currentPage)
-      .then(result => (this.currentPainting = result))
-      .then(() => this.currentPage++);
-  }
-};
+  };
 </script>
 
 <style scoped>
-.gallery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 700px
-}
-.frame,
-.painting {
-  position: absolute;
-}
+  .gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px
+  }
+  .frame,
+  .painting,
+  button {
+    position: absolute;
+  }
 
-.frame {
-  z-index: 1;
-  height: 600px
-}
+  .frame {
+    z-index: 1;
+    height: 600px
+  }
 
-.painting {
-  height: 400px
-}
+  .painting {
+    height: 400px
+  }
+
+  button {
+    align-self: flex-end
+  }
 </style>
