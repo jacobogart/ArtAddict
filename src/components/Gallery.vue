@@ -5,7 +5,7 @@
       alt="Image Frame"
       class="frame"
       v-bind:style="{ 
-        width: this.findWidth() + 300 + 'px' 
+        width: this.findWidth() * 1.38 + 'px',
       }"
     />
     <img
@@ -13,7 +13,7 @@
       v-bind:src="currentPainting.imageURL"
       v-bind:alt="currentPainting.title"
       v-bind:style="{ 
-        width: this.findWidth() + 'px' 
+        width: this.findWidth() + 'px',
       }"
     />
   </section>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       currentPainting: {},
-      currentPage: 1
+      currentPage: 126
     };
   },
   methods: {
@@ -55,12 +55,12 @@ export default {
   position: absolute;
 }
 
-.painting {
-  height: 400px
-}
-
 .frame {
   z-index: 1;
-  height: 550px
+  height: 600px
+}
+
+.painting {
+  height: 400px
 }
 </style>
