@@ -37,14 +37,18 @@
       },
       nextPage() {
         this.currentPage++;
+        this.getPainting();
+      },
+      getPainting() {
         fetchPainting(this.currentPage)
-          .then(result => (this.currentPainting = result))
+        .then(result => { 
+          this.currentPage = result.pageNum;
+          this.currentPainting = result.cleanPainting
+        })
       }
     },
     created() {
-      fetchPainting(this.currentPage)
-        .then(result => (this.currentPainting = result))
-        // .then(() => this.currentPage++);
+      this.getPainting();
     }
   };
 </script>
