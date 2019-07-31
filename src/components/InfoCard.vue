@@ -18,7 +18,7 @@ export default {
 <style scoped>
 .info-card {
   font-family: Arial, Helvetica, sans-serif;
-  width: 350px;
+  width: 450px;
   height: 165px;
   background-color: rgb(250, 244, 228);
   padding: 10px;
