@@ -8,10 +8,13 @@
   </section>
   <section v-else>
     <div v-for="(headline, index) in headlines" :key="index">
-      <img :src="headline" alt="News headline" class="headline" 
+      <img
+        :src="headline.url"
+        alt="News headline"
+        class="headline"
         v-bind:style="{ 
-          top: getRandomTop() + 'px',
-          left: getRandomLeft() + 'px'
+          top: headline.top + 'px',
+          left: headline.left + 'px'
         }"
       />
     </div>
@@ -63,10 +66,10 @@ export default {
       });
     },
     getRandomTop() {
-      return Math.random() * window.innerHeight / 2;
+      return (Math.random() * window.innerHeight) / 2;
     },
     getRandomLeft() {
-      return Math.random() * window.innerWidth / 2;
+      return (Math.random() * window.innerWidth) / 2;
     },
     populateHeadlines() {
       const localHeadlines = [
@@ -82,9 +85,13 @@ export default {
 
       localHeadlines.forEach((headline, index) => {
         setTimeout(() => {
-          this.headlines.push(headline);
+          this.headlines.push({
+            url: headline,
+            top: this.getRandomTop(),
+            left: this.getRandomLeft()
+          });
         }, 500 * (index + 1));
-      })
+      });
     }
   },
   created() {
