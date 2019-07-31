@@ -18,7 +18,6 @@ const paintingCleaner = (results, pageNum) => {
 };
 
 export const fetchPainting = (pageNum) => {
-  console.log(process.env)
   const url = `https://api.harvardartmuseums.org/object?classification=Paintings&size=1&apikey=${
     process.env.VUE_APP_API_KEY
   }&page=${pageNum}&hasimage=1`;
